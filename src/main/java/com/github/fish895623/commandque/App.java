@@ -7,9 +7,8 @@ import org.springframework.boot.context.ApplicationPidFileWriter;
 @SpringBootApplication
 public class App {
   public static void main(String[] args) {
-     SpringApplication.run(App.class, args);
-//    SpringApplication app = new SpringApplication(App.class);
-//    app.addListeners(new ApplicationPidFileWriter());
-//    app.run(args);
+    SpringApplication app = new SpringApplication(App.class);
+    app.addListeners(new ApplicationPidFileWriter());
+    app.run(args);
   }
 }

@@ -1,3 +1,6 @@
 spring:
-    pid:
-       file: que.pid
+  pid:
+    file: que.pid
+---
+logging:
+  config: classpath:log4j2.yml
