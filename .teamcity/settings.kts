@@ -85,7 +85,9 @@ object Build_2 : BuildType({
 
     steps {
         script {
-            scriptContent = "echo abcd"
+            scriptContent = """
+              echo abcd
+            """.trimIndent()
         }
     }
 
