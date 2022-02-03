@@ -32,10 +32,51 @@ version = "2021.2"
 project {
 
     buildType(Build)
+    buildType(Build_2)
 }
 
 object Build : BuildType({
     name = "Build"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
+
+    steps {
+        gradle {
+            tasks = "bootJar"
+        }
+    }
+
+    triggers {
+        vcs {
+        }
+    }
+
+    features {
+        commitStatusPublisher {
+            vcsRootExtId = "${DslContext.settingsRoot.id}"
+            publisher = github {
+                githubUrl = "https://api.github.com"
+                authType = personalToken {
+                    token = "credentialsJSON:fb871c07-1d54-4a49-8fb8-26a235b2b988"
+                }
+            }
+        }
+        pullRequests {
+            vcsRootExtId = "${DslContext.settingsRoot.id}"
+            provider = github {
+                authType = token {
+                    token = "credentialsJSON:fb871c07-1d54-4a49-8fb8-26a235b2b988"
+                }
+                filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
+            }
+        }
+    }
+})
+
+object Build_2 : BuildType({
+    name = "Build (1)"
 
     vcs {
         root(DslContext.settingsRoot)
